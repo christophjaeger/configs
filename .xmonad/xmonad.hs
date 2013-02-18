@@ -39,6 +39,10 @@ myLogHook dbus = defaultPP
 			{DBus.signalBody = [DBus.toVariant (UTF8.decodeString s)]}
 	}
 
+myTerminal = c ++ "; if [ $? -eq 2 ]; then " ++ d ++ "; " ++ c ++ "; fi"
+	where d = "urxvt256cd --quiet --opendisplay --fork"
+	      c = "urxvt256cc -e tmux -2"
+
 main = do
 	session <- getEnv "DESKTOP_SESSION"
 	let config = maybe desktopConfig desktop session
@@ -53,6 +57,7 @@ main = do
 		, keys       = myKeys <+> keys config
 		, logHook    = dynamicLogWithPP (myLogHook dbus) <+> logHook config
 		, layoutHook = smartBorders $ layoutHook config
+		, terminal   = myTerminal
 		}
 
 desktop s = case s of
