@@ -10,6 +10,7 @@ import XMonad.Config.Gnome
 import XMonad.Config.Kde
 import XMonad.Config.Xfce
 import XMonad.Hooks.DynamicLog
+import XMonad.Layout.NoBorders
 
 import qualified DBus as DBus
 import qualified DBus.Client as C
@@ -48,9 +49,10 @@ main = do
 		, C.nameDoNotQueue
 		]
 	xmonad $ config
-		{ modMask = myModMask
-		, keys    = myKeys <+> keys config
-		, logHook = dynamicLogWithPP (myLogHook dbus) <+> logHook config
+		{ modMask    = myModMask
+		, keys       = myKeys <+> keys config
+		, logHook    = dynamicLogWithPP (myLogHook dbus) <+> logHook config
+		, layoutHook = smartBorders $ layoutHook config
 		}
 
 desktop s = case s of
