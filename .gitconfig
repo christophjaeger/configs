@@ -3,3 +3,9 @@
 	email = email@christophjaeger.info
 [color]
 	ui = auto
+[alias]
+	br = branch
+	ci = commit -s
+	co = checkout
+	cp = cherry-pick
+	st = status --column
