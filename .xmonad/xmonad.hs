@@ -10,6 +10,7 @@ import XMonad.Config.Gnome
 import XMonad.Config.Kde
 import XMonad.Config.Xfce
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.NoBorders
 
 import qualified DBus as DBus
@@ -39,6 +40,13 @@ myLogHook dbus = defaultPP
 			{DBus.signalBody = [DBus.toVariant (UTF8.decodeString s)]}
 	}
 
+myManageHook = composeOne
+	[ isFullscreen -?> doFullFloat
+	, isDialog     -?> doCenterFloat
+	, transience
+	]
+
+
 myTerminal = c ++ "; if [ $? -eq 2 ]; then " ++ d ++ "; " ++ c ++ "; fi"
 	where d = "urxvt256cd --quiet --opendisplay --fork"
 	      c = "urxvt256cc -e tmux -2"
@@ -57,6 +65,7 @@ main = do
 		, keys       = myKeys <+> keys config
 		, logHook    = dynamicLogWithPP (myLogHook dbus) <+> logHook config
 		, layoutHook = smartBorders $ layoutHook config
+		, manageHook = myManageHook <+> manageHook config
 		, terminal   = myTerminal
 		}
 
