@@ -17,3 +17,11 @@ alias configs="git --git-dir=${HOME}/.configs.git --work-tree=${HOME}"
 for cmd in br ci co cp st; do
 	alias g${cmd}="git ${cmd}"
 done
+
+autoload -U compinit && compinit
+# context: ":completion:function:completer:command:argument:tag"
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*:descriptions' format '%B%d%b'
+zstyle ':completion:*:messages' format '%d'
+zstyle ':completion:*:warnings' format 'No matches for: %d'
+zstyle ':completion:*' group-name ''
