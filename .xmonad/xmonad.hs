@@ -12,6 +12,8 @@ import XMonad.Config.Xfce
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.NoBorders
+import XMonad.Util.EZConfig (additionalKeys)
+import XMonad.Util.Run (safeSpawn)
 
 import qualified DBus as DBus
 import qualified DBus.Client as C
@@ -70,8 +72,10 @@ main = do
 		}
 
 desktop s = case s of
-	"gnome"        -> gnomeConfig
+	"gnome"        -> myGnomeConfig
 	"kde"          -> kde4Config
 	"xfce"         -> xfceConfig
-	"xmonad-gnome" -> gnomeConfig
+	"xmonad-gnome" -> myGnomeConfig
 	_              -> desktopConfig
+	where myGnomeConfig = additionalKeys gnomeConfig
+		[((myModMask .|. shiftMask, xK_q), safeSpawn "gnome-session-quit" ["--logout"])]
