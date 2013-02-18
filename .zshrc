@@ -14,7 +14,7 @@ SAVEHIST=1000
 
 alias configs="git --git-dir=${HOME}/.configs.git --work-tree=${HOME}"
 
-for cmd in br ci co cp st; do
+for cmd in br ci co cp st ls ll lg; do
 	alias g${cmd}="git ${cmd}"
 done
 

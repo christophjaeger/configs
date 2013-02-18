@@ -9,3 +9,6 @@
 	co = checkout
 	cp = cherry-pick
 	st = status --column
+	ls = log --pretty=format:\"%C(yellow)%h%C(red)%d %C(reset)%s %C(green)(%cd) %C(blue)<%an>\" --date=relative
+	ll = log --pretty=format:\"%C(yellow)%h%C(red)%d %C(reset)%s %C(green)(%cd) %C(blue)<%an>\" --date=relative --stat
+	lg = log --pretty=format:\"%C(yellow)%h%C(red)%d %C(reset)%s %C(green)(%cd) %C(blue)<%an>\" --date=relative --graph
