@@ -21,6 +21,7 @@ done
 autoload -U compinit && compinit
 # context: ":completion:function:completer:command:argument:tag"
 zstyle ':completion:*' verbose yes
+zstyle ':completion:*' matcher-list '' '+m:{a-z}={A-Z}' '+m:{A-Z}={a-z}'
 zstyle ':completion:*:descriptions' format '%B%d%b'
 zstyle ':completion:*:messages' format '%d'
 zstyle ':completion:*:warnings' format 'No matches for: %d'
