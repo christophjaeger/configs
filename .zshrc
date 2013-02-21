@@ -1,3 +1,5 @@
+setopt prompt_subst
+
 setopt append_history
 setopt extended_history
 setopt hist_expire_dups_first
@@ -18,6 +20,8 @@ for cmd in br ci co cp st ls ll lg; do
 	alias g${cmd}="git ${cmd}"
 done
 
+autoload -U colors && colors
+
 autoload -U compinit && compinit
 # context: ":completion:function:completer:command:argument:tag"
 zstyle ':completion:*' verbose yes
@@ -26,3 +30,5 @@ zstyle ':completion:*:descriptions' format '%B%d%b'
 zstyle ':completion:*:messages' format '%d'
 zstyle ':completion:*:warnings' format 'No matches for: %d'
 zstyle ':completion:*' group-name ''
+
+PROMPT='[%n@%{$fg[red]%}%m%{$reset_color%}:%0~]%# '
